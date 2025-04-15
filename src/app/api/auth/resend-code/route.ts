@@ -35,6 +35,11 @@ export async function POST(req: Request) {
     return serveApiResponse(true, 'Verification code resent successfully', 200)
   } catch (err) {
     console.error('Resend Code API Error:', err)
-    return serveApiResponse(false, "Internal server error, while resending the verification code ", 500, err)
+    return serveApiResponse(
+      false,
+      'Internal server error, while resending the verification code ',
+      500,
+      err
+    )
   }
 }

@@ -14,6 +14,6 @@ export function generateVerificationCode(length = 6): string {
   return code
 }
 
-export function verifyCodeExpiry(){
+export function verifyCodeExpiry() {
   return new Date(Date.now() + 3600000)
 }
