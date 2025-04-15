@@ -1,53 +1,51 @@
-import dbConnect from "@/lib/dbConnect";
-import UserModel from "@/model/User";
-import bcrypt from "bcryptjs";
-import { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+import dbConnect from '@/lib/dbConnect'
+import UserModel from '@/model/User'
+import bcrypt from 'bcryptjs'
+import { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      id: "Credentials",
-      name: "Credentials",
+      id: 'Credentials',
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email or Username", type: "text", placeholder: "Enter your email or username" },
-        password: { label: "Password", type: "password" },
+        email: {
+          label: 'Email or Username',
+          type: 'text',
+          placeholder: 'Enter your email or username',
+        },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials: any): Promise<any> {
-        await dbConnect();
+        await dbConnect()
         try {
           const user = await UserModel.findOne({
-            $or: [
-              { email: credentials.identifier },
-              { username: credentials.identifier },
-            ],
-          });
+            $or: [{ email: credentials.identifier }, { username: credentials.identifier }],
+          })
 
           if (!user) {
-            throw new Error("User not found with provided details");
+            throw new Error('User not found with provided details')
           }
 
           if (!user.isVerified) {
-            throw new Error("Please verify your account before login");
+            throw new Error('Please verify your account before login')
           }
 
           if (!user.password) {
-            throw new Error("User password is not set");
+            throw new Error('User password is not set')
           }
 
-          const isPasswordCorrect = await bcrypt.compare(
-            credentials.password,
-            user.password
-          );
+          const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password)
 
           if (isPasswordCorrect) {
-            return user;
+            return user
           } else {
-            throw new Error("Wrong password, enter the correct password");
+            throw new Error('Wrong password, enter the correct password')
           }
         } catch (err: any) {
-          throw new Error(err.message || "Login failed");
+          throw new Error(err.message || 'Login failed')
         }
       },
     }),
@@ -60,59 +58,59 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user, account, profile }) {
-      await dbConnect();
+      await dbConnect()
 
       // Handle Google login
-      if (account?.provider === "google") {
-        let existingUser = await UserModel.findOne({ email: token.email });
+      if (account?.provider === 'google') {
+        let existingUser = await UserModel.findOne({ email: token.email })
 
         if (!existingUser) {
           // Create new Google user
           existingUser = await UserModel.create({
             email: token.email,
-            username: token.email?.split("@")[0],
+            username: token.email?.split('@')[0],
             isVerified: true,
-            provider: "google",
+            provider: 'google',
             googleId: account.providerAccountId,
-          });
+          })
         }
 
-        token._id = existingUser._id?.toString();
-        token.isVerified = existingUser.isVerified;
-        token.isAdmin = existingUser.isAdmin;
-        token.username = existingUser.username;
+        token._id = existingUser._id?.toString()
+        token.isVerified = existingUser.isVerified
+        token.isAdmin = existingUser.isAdmin
+        token.username = existingUser.username
       }
 
       // Local auth (Credentials)
       if (user) {
-        token._id = user._id?.toString();
-        token.isVerified = user.isVerified;
-        token.isAdmin = user.isAdmin;
-        token.username = user.username;
+        token._id = user._id?.toString()
+        token.isVerified = user.isVerified
+        token.isAdmin = user.isAdmin
+        token.username = user.username
       }
 
-      return token;
+      return token
     },
 
     async session({ session, token }) {
       if (token) {
-        session.user._id = token._id;
-        session.user.isVerified = token.isVerified;
-        session.user.isAdmin = token.isAdmin;
-        session.user.username = token.username;
+        session.user._id = token._id
+        session.user.isVerified = token.isVerified
+        session.user.isAdmin = token.isAdmin
+        session.user.username = token.username
       }
 
-      return session;
+      return session
     },
   },
 
   pages: {
-    signIn: "/sign-in",
+    signIn: '/sign-in',
   },
 
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
 
   secret: process.env.NEXTAUTH_SECRET,
-};
+}

@@ -16,8 +16,11 @@ export default function Home() {
             <Link href="/about" className="hover:text-gray-300">
               About
             </Link>
-            <Link href="/login" className="hover:text-gray-300">
+            <Link href="/auth/sign-in" className="hover:text-gray-300">
               Login
+            </Link>
+            <Link href="/auth/sign-up" className="hover:text-gray-300">
+              Signup
             </Link>
           </nav>
         </div>

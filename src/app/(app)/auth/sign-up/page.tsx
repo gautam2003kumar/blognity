@@ -22,6 +22,7 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
 
 const SignUp = () => {
   const [username, setUsername] = useState('')
@@ -107,6 +108,31 @@ const SignUp = () => {
           </h1>
           <p className="text-gray-600">Start sharing your ideas with the world 🌍</p>
         </div>
+
+        {/*<Button
+          variant="outline"
+          className="w-full"
+          onClick={() => signIn('google', { callbackUrl: '/' })}
+        >
+          <svg
+            className="h-5 w-5 mr-2"
+            viewBox="0 0 488 512"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M488 261.8C488 403.3 391.6 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123.1 24.5 166.3 64.9l-67.5 64.6C317.2 99.5 285.6 88 248 88c-90.5 0-164 73.5-164 164s73.5 164 164 164c78.1 0 123.5-44.3 132.8-106.5H248v-85.7h240C487.1 237.6 488 249.6 488 261.8z" />
+          </svg>
+          Continue with Google
+        </Button>
+
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300" />
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="bg-white px-2 text-muted-foreground">Or sign up with email</span>
+          </div>
+        </div>*/}
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
