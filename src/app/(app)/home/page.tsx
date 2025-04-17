@@ -101,7 +101,7 @@ const Home = () => {
                     </CardHeader>
                     <CardContent>
                       <Link
-                        href={`/blog/${blog._id}`}
+                        href={`/blog/pre-view/${blog._id}`}
                         className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline hover:underline-offset-4"
                       >
                         Read More →
@@ -149,7 +149,7 @@ const Home = () => {
                     </CardHeader>
                     <CardContent>
                       <Link
-                        href={`/blog/${blog._id}`}
+                        href={`/blog/pre-view/${blog._id}`}
                         className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline hover:underline-offset-4"
                       >
                         Read More →
