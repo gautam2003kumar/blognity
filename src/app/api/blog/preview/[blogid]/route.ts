@@ -1,18 +1,17 @@
 import dbConnect from '@/lib/dbConnect'
 import BlogModel from '@/model/Blog'
 import { serveApiResponse } from '@/utils/responseUtil'
+import { NextRequest } from 'next/server'
 
 export async function GET(
-  req: Request,
-  { params }: { params: { blogid: string } }
-) {
+  req: NextRequest) {
   try {
-
     await dbConnect()
-    const { blogid } = await params
+
+    const url = new URL(req.url);
+    const blogid = url.pathname.split('/')[4]
 
     const blog = await BlogModel.findOne({ _id: blogid })
-
 
     if (!blog) {
       return serveApiResponse(false, 'Blog not found', 404)
