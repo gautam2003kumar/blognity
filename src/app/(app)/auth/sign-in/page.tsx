@@ -69,18 +69,18 @@ const SignIn = () => {
   }
 
   return (
-<div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
-<div className="flex justify-center items-center min-h-screen">
-      <div className="w-full max-w-md p-8 space-y-8  rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Welcome to Blognity
-          </h1>
-          <p className="mb-4">Sign in to start sharing your thoughts with the world!</p>
-        </div>
+    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="w-full max-w-md p-8 space-y-8  rounded-lg shadow-md">
+          <div className="text-center">
+            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+              Welcome to Blognity
+            </h1>
+            <p className="mb-4">Sign in to start sharing your thoughts with the world!</p>
+          </div>
 
-        {/* Google Sign In */}
-        {/*<Button
+          {/* Google Sign In */}
+          {/*<Button
           variant="outline"
           className="w-full"
           onClick={() => signIn('google', { callbackUrl: '/home' })}
@@ -105,66 +105,66 @@ const SignIn = () => {
           </div>
         </div> */}
 
-        {/* Credentials Sign In */}
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="identifier"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email or Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your email or username" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          {/* Credentials Sign In */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="identifier"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email or Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your email or username" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="Enter your password" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="Enter your password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <Button type="submit" disabled={isSubmitting} className="w-full">
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait...
-                </>
-              ) : (
-                'Sign in'
-              )}
-            </Button>
-          </form>
-        </Form>
+              <Button type="submit" disabled={isSubmitting} className="w-full">
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait...
+                  </>
+                ) : (
+                  'Sign in'
+                )}
+              </Button>
+            </form>
+          </Form>
 
-        <div className="text-center">
-          <p>
-            Don&rsquo;t have an account yet?{' '}
-            <Link href="/auth/sign-up" className="text-blue-600">
-              Sign up
-            </Link>
-          </p>
-          <p className="mt-2 text-sm">
-            Forgot your password?{' '}
-            <Link href="/auth/forgot-password" className="text-blue-600">
-              Reset it here
-            </Link>
-          </p>
+          <div className="text-center">
+            <p>
+              Don&rsquo;t have an account yet?{' '}
+              <Link href="/auth/sign-up" className="text-blue-600">
+                Sign up
+              </Link>
+            </p>
+            <p className="mt-2 text-sm">
+              Forgot your password?{' '}
+              <Link href="/auth/forgot-password" className="text-blue-600">
+                Reset it here
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-</div>
   )
 }
 

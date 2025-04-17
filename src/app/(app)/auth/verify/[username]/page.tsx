@@ -88,81 +88,81 @@ const VerifyAccount = () => {
   }
 
   return (
-<div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
-<motion.div
-      className="flex justify-center items-center min-h-screen  px-4"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      <div className="w-full max-w-md p-8 space-y-8 rounded-2xl shadow-xl">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-2 ">Verify Your Account</h1>
-          <p className="text-gray-500 text-sm">
-            Enter the 6-digit verification code sent to your email
-          </p>
-        </div>
-
-        <div>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="flex items-center justify-center">
-                <FormField
-                  control={form.control}
-                  name="code"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-center block mb-2 text-sm font-medium text-gray-700">
-                        Verification Code
-                      </FormLabel>
-
-                      <FormControl>
-                        <div className="flex justify-center mt-2">
-                          <InputOTP
-                            maxLength={6}
-                            {...field}
-                            value={field.value || ''}
-                            onChange={field.onChange}
-                            className="gap-2"
-                          >
-                            <InputOTPGroup>
-                              {[...Array(6)].map((_, index) => (
-                                <InputOTPSlot
-                                  key={index}
-                                  index={index}
-                                  className="w-12 h-12 text-lg"
-                                />
-                              ))}
-                            </InputOTPGroup>
-                          </InputOTP>
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <Button type="submit" className="w-full text-lg">
-                Submit
-              </Button>
-            </form>
-          </Form>
-        </div>
-        <div className="text-center text-sm mt-2">
-          {canResend ? (
-            <Button variant="link" onClick={resendOtp} className="text-blue-600">
-              Resend Code
-            </Button>
-          ) : (
-            <p className="text-gray-400">
-              You can resend code in {timer} second{timer !== 1 && 's'}
+    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+      <motion.div
+        className="flex justify-center items-center min-h-screen  px-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="w-full max-w-md p-8 space-y-8 rounded-2xl shadow-xl">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-2 ">Verify Your Account</h1>
+            <p className="text-gray-500 text-sm">
+              Enter the 6-digit verification code sent to your email
             </p>
-          )}
+          </div>
+
+          <div>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="flex items-center justify-center">
+                  <FormField
+                    control={form.control}
+                    name="code"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-center block mb-2 text-sm font-medium text-gray-700">
+                          Verification Code
+                        </FormLabel>
+
+                        <FormControl>
+                          <div className="flex justify-center mt-2">
+                            <InputOTP
+                              maxLength={6}
+                              {...field}
+                              value={field.value || ''}
+                              onChange={field.onChange}
+                              className="gap-2"
+                            >
+                              <InputOTPGroup>
+                                {[...Array(6)].map((_, index) => (
+                                  <InputOTPSlot
+                                    key={index}
+                                    index={index}
+                                    className="w-12 h-12 text-lg"
+                                  />
+                                ))}
+                              </InputOTPGroup>
+                            </InputOTP>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <Button type="submit" className="w-full text-lg">
+                  Submit
+                </Button>
+              </form>
+            </Form>
+          </div>
+          <div className="text-center text-sm mt-2">
+            {canResend ? (
+              <Button variant="link" onClick={resendOtp} className="text-blue-600">
+                Resend Code
+              </Button>
+            ) : (
+              <p className="text-gray-400">
+                You can resend code in {timer} second{timer !== 1 && 's'}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-    </motion.div>
-</div>
+      </motion.div>
+    </div>
   )
 }
 

@@ -100,17 +100,17 @@ const SignUp = () => {
   }
 
   return (
-<div className=" bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
-<div className="flex justify-center items-center min-h-screen">
-      <div className="w-full max-w-md p-8 space-y-8  rounded-2xl shadow-xl">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight  lg:text-5xl mb-2">
-            Create your Blognity account
-          </h1>
-          <p className="">Start sharing your ideas with the world 🌍</p>
-        </div>
+    <div className=" bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="w-full max-w-md p-8 space-y-8  rounded-2xl shadow-xl">
+          <div className="text-center">
+            <h1 className="text-4xl font-extrabold tracking-tight  lg:text-5xl mb-2">
+              Create your Blognity account
+            </h1>
+            <p className="">Start sharing your ideas with the world 🌍</p>
+          </div>
 
-        {/*<Button
+          {/*<Button
           variant="outline"
           className="w-full"
           onClick={() => signIn('google', { callbackUrl: '/' })}
@@ -135,92 +135,92 @@ const SignUp = () => {
           </div>
         </div>*/}
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Choose a unique username"
-                      {...field}
-                      onChange={e => {
-                        field.onChange(e)
-                        debounced(e.target.value)
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                  {isCheckingUsername && (
-                    <p className="text-sm text-gray-500">Checking availability...</p>
-                  )}
-                  {!isCheckingUsername && usernameMessage && (
-                    <p
-                      className={`text-sm ${
-                        usernameMessage.toLowerCase().includes('available')
-                          ? 'text-green-600'
-                          : 'text-red-500'
-                      }`}
-                    >
-                      {usernameMessage}
-                    </p>
-                  )}
-                </FormItem>
-              )}
-            />
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Choose a unique username"
+                        {...field}
+                        onChange={e => {
+                          field.onChange(e)
+                          debounced(e.target.value)
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                    {isCheckingUsername && (
+                      <p className="text-sm text-gray-500">Checking availability...</p>
+                    )}
+                    {!isCheckingUsername && usernameMessage && (
+                      <p
+                        className={`text-sm ${
+                          usernameMessage.toLowerCase().includes('available')
+                            ? 'text-green-600'
+                            : 'text-red-500'
+                        }`}
+                      >
+                        {usernameMessage}
+                      </p>
+                    )}
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input type="email" placeholder="your@email.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="your@email.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="Create a secure password" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="Create a secure password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <Button type="submit" disabled={isSubmitting} className="w-full">
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating account...
-                </>
-              ) : (
-                'Sign Up'
-              )}
-            </Button>
-          </form>
-        </Form>
+              <Button type="submit" disabled={isSubmitting} className="w-full">
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating account...
+                  </>
+                ) : (
+                  'Sign Up'
+                )}
+              </Button>
+            </form>
+          </Form>
 
-        <div className="text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link href="/auth/sign-in" className="text-indigo-600 font-medium hover:underline">
-            Sign in
-          </Link>
+          <div className="text-center text-sm text-gray-600">
+            Already have an account?{' '}
+            <Link href="/auth/sign-in" className="text-indigo-600 font-medium hover:underline">
+              Sign in
+            </Link>
+          </div>
         </div>
       </div>
     </div>
-</div>
   )
 }
 
