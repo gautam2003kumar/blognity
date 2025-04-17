@@ -10,7 +10,6 @@ export async function GET(
 
     await dbConnect()
     const { blogid } = await params
-    console.log(blogid)
 
     const blog = await BlogModel.findOne({ _id: blogid })
 
