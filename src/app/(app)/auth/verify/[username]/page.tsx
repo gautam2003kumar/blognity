@@ -88,15 +88,16 @@ const VerifyAccount = () => {
   }
 
   return (
-    <motion.div
-      className="flex justify-center items-center min-h-screen bg-gray-100 px-4"
+<div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+<motion.div
+      className="flex justify-center items-center min-h-screen  px-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-xl">
+      <div className="w-full max-w-md p-8 space-y-8 rounded-2xl shadow-xl">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-2 text-gray-900">Verify Your Account</h1>
+          <h1 className="text-4xl font-bold mb-2 ">Verify Your Account</h1>
           <p className="text-gray-500 text-sm">
             Enter the 6-digit verification code sent to your email
           </p>
@@ -161,6 +162,7 @@ const VerifyAccount = () => {
         </div>
       </div>
     </motion.div>
+</div>
   )
 }
 

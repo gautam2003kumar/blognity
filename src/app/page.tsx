@@ -5,7 +5,8 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="bg-white text-gray-900">
+<div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+<div className=" ">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white py-20">
         <div className="text-center max-w-2xl mx-auto">
@@ -30,7 +31,7 @@ export default function Home() {
         <div className="max-w-screen-xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">Featured Posts</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="p-6 rounded-lg shadow-lg border-2">
               <h3 className="text-2xl font-semibold mb-4">How to Start Blogging</h3>
               <p className="text-lg mb-4">
                 Tips for beginners to make their first blog post stand out!
@@ -42,8 +43,8 @@ export default function Home() {
                 Read More →
               </Link>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-semibold mb-4">Creative Writing Ideas</h3>
+            <div className=" p-6 rounded-lg shadow-lg border-2">
+              <h3 className="text-2xl font-semibold mb-4 ">Creative Writing Ideas</h3>
               <p className="text-lg mb-4">
                 Unleash your creativity and inspire others with unique writing ideas.
               </p>
@@ -54,7 +55,7 @@ export default function Home() {
                 Read More →
               </Link>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className=" p-6 rounded-lg shadow-lg border-2">
               <h3 className="text-2xl font-semibold mb-4">Building Your Audience</h3>
               <p className="text-lg mb-4">Practical strategies to grow and engage your audience.</p>
               <Link
@@ -71,5 +72,6 @@ export default function Home() {
       {/* Footer */}
       <Footer />
     </div>
+</div>
   )
 }

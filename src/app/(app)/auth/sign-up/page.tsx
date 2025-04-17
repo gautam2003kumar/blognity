@@ -100,13 +100,14 @@ const SignUp = () => {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-white to-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl shadow-xl">
+<div className=" bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+<div className="flex justify-center items-center min-h-screen">
+      <div className="w-full max-w-md p-8 space-y-8  rounded-2xl shadow-xl">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 lg:text-5xl mb-2">
+          <h1 className="text-4xl font-extrabold tracking-tight  lg:text-5xl mb-2">
             Create your Blognity account
           </h1>
-          <p className="text-gray-600">Start sharing your ideas with the world 🌍</p>
+          <p className="">Start sharing your ideas with the world 🌍</p>
         </div>
 
         {/*<Button
@@ -219,6 +220,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+</div>
   )
 }
 

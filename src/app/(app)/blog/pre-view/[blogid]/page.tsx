@@ -71,7 +71,7 @@ const BlogDetail = () => {
 
   if (!blog) return <BlogLoading />
   return (
-    <div>
+    <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       {/* bog copy */}
       <div>
         <button
@@ -110,7 +110,7 @@ const BlogDetail = () => {
         </div>
       </div>
       {/* Author Section */}
-      <div className="max-w-3xl mx-auto mt-12 p-4 bg-gray-50 rounded-lg shadow-md">
+      <div className="max-w-3xl mx-auto mt-12 p-4  rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold mb-4">About the Author</h2>
         <p className="text-sm text-gray-500">This is a placeholder for author information.</p>
         <div className="flex items-center mt-4">
