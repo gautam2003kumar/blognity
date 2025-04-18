@@ -7,16 +7,10 @@ import EditorRenderer from '@/components/Editor/Renderer'
 import BlogLoading from '@/components/Loader/BlogLoading'
 import { Link, Unlink } from 'lucide-react'
 import Image from 'next/image'
-import { EditorContent } from '@/types/Block'
+import { Blog } from '@/types/blog'
+import CommentSection from '@/components/Comment/comment'
 
-type Blog = {
-  _id: string
-  bannerUrl: string
-  title: string
-  description: string
-  category: string
-  content: EditorContent
-}
+
 
 const BlogDetail = () => {
   const [blog, setBlog] = useState<Blog | null>(null)
@@ -121,6 +115,12 @@ const BlogDetail = () => {
           </div>
         </div>
       </div>
+     {/* Comment Section */}
+      <div className="max-w-3xl mx-auto mt-12 p-4 border-t border-gray-200">
+        
+        <CommentSection blogId={blogId} />
+        
+        </div>
     </div>
   )
 }

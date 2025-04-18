@@ -16,19 +16,10 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 
-// Extend NextAuth User type to include _id and username
-interface CustomUser {
-  name?: string | null
-  email?: string | null
-  image?: string | null
-  username?: string
-  _id?: string
-}
 
 const Navbar = () => {
   const { data: session } = useSession()
-  const user = session?.user as CustomUser | undefined
-
+  const user = session?.user;
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
 
   useEffect(() => {
