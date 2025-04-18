@@ -1,13 +1,13 @@
 import dbConnect from '@/lib/dbConnect'
 import { serveApiResponse } from '@/utils/responseUtil'
 import CommentModel from '@/model/Comment'
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../auth/[...nextauth]/options'
 
 interface CommentRequestBody {
   content: string
   blogId: string
-  userId: string
-  name: string
+  name?: string
   status?: string
   createdAt?: Date
   updatedAt?: Date
@@ -22,32 +22,25 @@ export async function POST(req: Request) {
   await dbConnect()
 
   try {
-    const body: CommentRequestBody = await req.json()
-    const { content, blogId, name, userId } = body
-
-    // Basic validation
-    if (!content || !blogId) {
-      return serveApiResponse(false, 'Comment content and blog ID are required.', 400)
-    }
-
-    // Get session
-    const session = await getSession({ req: { headers: Object.fromEntries(req.headers) } })
+    const session = await getServerSession(authOptions)
 
     if (!session?.user?._id) {
       return serveApiResponse(false, 'Unauthorized. Please log in to comment.', 401)
     }
 
-    // Create comment
+    const body: CommentRequestBody = await req.json()
+    const { content, blogId, name } = body
+
+    if (!content || !blogId) {
+      return serveApiResponse(false, 'Comment content and blog ID are required.', 400)
+    }
+
     const newComment = await CommentModel.create({
-      userId,
+      userId: session.user._id,
       name,
       blogId,
       content,
     })
-
-    if (!newComment) {
-      return serveApiResponse(false, 'Something went wrong. Could not save your comment.', 500)
-    }
 
     return serveApiResponse(true, 'Comment posted successfully!', 201, newComment)
   } catch (error) {

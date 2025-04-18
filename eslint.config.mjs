@@ -7,6 +7,25 @@ const __dirname = dirname(__filename)
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+  recommendedConfig: {
+    files: ['**/*.{js,ts,jsx,tsx}'],
+    rules: {
+      // JS/TS best practices
+      'no-unused-vars': 'warn',
+      'no-console': 'warn',
+      eqeqeq: 'error',
+
+      // React
+      'react/jsx-uses-react': 'off', // not needed in React 17+
+      'react/react-in-jsx-scope': 'off', // not needed in Next.js
+
+      // TypeScript
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+
+      // Prettier formatting handled by plugin
+      'prettier/prettier': 'warn',
+    },
+  },
 })
 
 export default [

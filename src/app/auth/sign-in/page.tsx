@@ -19,7 +19,6 @@ import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
-
 const SignIn = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
@@ -53,7 +52,8 @@ const SignIn = () => {
           })
         }
       } else if (result?.url) {
-        router.replace('/home')
+        router.back() // Takes the user to the previous page in history
+
         toast.success('Welcome back!', {
           description: 'You have successfully logged in.',
         })

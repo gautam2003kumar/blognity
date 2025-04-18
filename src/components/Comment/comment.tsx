@@ -6,6 +6,17 @@ import axios from 'axios'
 import { toast } from 'sonner'
 import { Comment } from '@/types/comment'
 import { Button } from '@/components/ui/button'
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from '@/components/ui/alert-dialog'
 
 const CommentSection = ({ blogId }: { blogId: string }) => {
   const [name, setName] = useState('')
@@ -19,39 +30,30 @@ const CommentSection = ({ blogId }: { blogId: string }) => {
   const fetchComments = async () => {
     try {
       const res = await axios.get(`/api/comment/all-comments/${blogId}`)
-      if (res.data.success) {
-        toast.success(res.data.message || 'Comments loaded successfully')
+      if (!res.data?.success) {
+        toast.error('Failed to load comments')
       } else {
-        toast.error(res.data.message || 'Failed to load comments')
+        setComments(res.data.data || [])
       }
-      setComments(res.data.data || [])
     } catch (err) {
-      toast.error('Failed to load comments' + (err as Error).message)
+      toast.error('Failed to load comments. ' + (err as Error).message)
     } finally {
       setLoadingComments(false)
     }
   }
 
   const handleDelete = async (commentId: string) => {
-    if (!confirm('Are you sure you want to delete this comment?')) return
-    console.log('Deleting comment with ID:', commentId)
     try {
       await axios.delete(`/api/comment/delete/${commentId}`)
       toast.success('Comment deleted')
       await fetchComments()
     } catch (err) {
-      toast.error('Failed to delete comment.' + (err as Error).message)
+      toast.error('Failed to delete comment. ' + (err as Error).message)
     }
   }
 
-  useEffect(() => {
-    setLoadingComments(true)
-    fetchComments()
-  }, [blogId])
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     if (!content.trim()) {
       toast.error('Comment cannot be empty.')
       return
@@ -74,11 +76,16 @@ const CommentSection = ({ blogId }: { blogId: string }) => {
         toast.error(response.data.message || 'Something went wrong.')
       }
     } catch (err) {
-      toast.error('Failed to post comment.' + (err as Error).message)
+      toast.error('Failed to post comment. ' + (err as Error).message)
     } finally {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    setLoadingComments(true)
+    fetchComments()
+  }, [blogId])
 
   return (
     <div className="space-y-8 mt-10">
@@ -125,18 +132,37 @@ const CommentSection = ({ blogId }: { blogId: string }) => {
         ) : (
           comments.map(comment => (
             <div key={comment._id} className="border p-4 rounded-lg">
-              <p className="text-sm ">{comment.content}</p>
-
+              <p className="text-sm">{comment.content}</p>
               <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
                 <div>
                   — {comment.name || user?.username || 'Anonymous'} ·{' '}
                   {new Date(comment.createdAt).toLocaleString()}
                 </div>
-
                 {(user?._id === comment.userId || user?.isAdmin) && (
-                  <Button variant="destructive" onClick={() => handleDelete(comment._id)}>
-                    Delete
-                  </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="destructive" size="sm">
+                        Delete
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently delete the comment.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          className="bg-red-600 hover:bg-red-700"
+                          onClick={() => handleDelete(comment._id)}
+                        >
+                          Delete
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 )}
               </div>
             </div>

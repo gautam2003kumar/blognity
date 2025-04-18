@@ -1,11 +1,13 @@
 // pages/index.tsx
 
 import Footer from '@/components/Footer/footer'
+import Navbar from '@/components/Navbar/navbar'
 import Link from 'next/link'
 
 export default function Home() {
   return (
     <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+      <Navbar />
       <div className=" ">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white py-20">
