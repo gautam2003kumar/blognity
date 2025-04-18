@@ -1,4 +1,4 @@
-import { EditorContent } from "./Block"
+import { EditorContent } from './Block'
 export type Blog = {
   _id: string
   bannerUrl: string

@@ -10,8 +10,6 @@ import Image from 'next/image'
 import { Blog } from '@/types/blog'
 import CommentSection from '@/components/Comment/comment'
 
-
-
 const BlogDetail = () => {
   const [blog, setBlog] = useState<Blog | null>(null)
   const params = useParams()
@@ -115,12 +113,10 @@ const BlogDetail = () => {
           </div>
         </div>
       </div>
-     {/* Comment Section */}
+      {/* Comment Section */}
       <div className="max-w-3xl mx-auto mt-12 p-4 border-t border-gray-200">
-        
         <CommentSection blogId={blogId} />
-        
-        </div>
+      </div>
     </div>
   )
 }

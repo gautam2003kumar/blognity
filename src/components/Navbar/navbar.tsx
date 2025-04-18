@@ -16,10 +16,9 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 
-
 const Navbar = () => {
   const { data: session } = useSession()
-  const user = session?.user;
+  const user = session?.user
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
 
   useEffect(() => {
