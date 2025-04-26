@@ -10,17 +10,14 @@ export async function GET(_req: NextRequest) {
     const Blogs = await Blog.find({
       status: 'published',
     })
-      .sort({ view: -1 })
-      .limit(5)
+      .sort({ createdAt: -1 })
       .select('-content')
-
-    if (!Blogs || Blogs.length === 0) {
+    if (!Blogs) {
       return serveApiResponse(false, 'No blogs found', 404)
     }
-
-    return serveApiResponse(true, 'Trending blogs fetched successfully', 200, Blogs)
+    return serveApiResponse(true, 'Blogs fetched successfully', 200, Blogs)
   } catch (error) {
     console.error('Error fetching blogs:', error)
-    return serveApiResponse(false, 'Unable to get the blogs', 500)
+    return serveApiResponse(false, 'Unable to get the blog', 500)
   }
 }

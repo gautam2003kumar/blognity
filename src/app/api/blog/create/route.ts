@@ -3,19 +3,10 @@ import dbConnect from '@/lib/dbConnect'
 import BlogModel from '@/model/Blog'
 import { getServerSession } from 'next-auth'
 import { serveApiResponse } from '@/utils/responseUtil'
-import { EditorContent } from '@/types/Block'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 
 // Define interface for request body
-interface BlogRequestBody {
-  title: string
-  content: EditorContent
-  bannerUrl?: string
-  description: string
-  status?: string
-  tags?: string[]
-  category?: string
-}
+import { BlogRequestBody } from '@/types/blog'
 
 export async function POST(req: NextRequest) {
   await dbConnect()

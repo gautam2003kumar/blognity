@@ -30,9 +30,7 @@ const CommentSection = ({ blogId }: { blogId: string }) => {
   const fetchComments = async () => {
     try {
       const res = await axios.get(`/api/comment/all-comments/${blogId}`)
-      if (!res.data?.success) {
-        toast.error('Failed to load comments')
-      } else {
+      if (res.data?.success) {
         setComments(res.data.data || [])
       }
     } catch (err) {

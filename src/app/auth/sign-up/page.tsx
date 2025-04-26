@@ -22,7 +22,6 @@ import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
-import { signIn } from 'next-auth/react'
 
 const SignUp = () => {
   const [username, setUsername] = useState('')

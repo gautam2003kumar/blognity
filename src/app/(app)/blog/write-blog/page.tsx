@@ -139,8 +139,9 @@ const Page = () => {
               <SelectGroup>
                 <SelectLabel>Categories</SelectLabel>
                 {Category.map((category, index) => (
-                  <SelectItem key={index} value={category}>
-                    {category}
+                  <SelectItem key={index} value={category.name}>
+                    {category.icon && <category.icon />}
+                    {category.name}
                   </SelectItem>
                 ))}
               </SelectGroup>

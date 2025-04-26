@@ -3,13 +3,16 @@ import mongoose, { Schema, Document, Model } from 'mongoose'
 export interface IUser extends Document {
   username: string
   email: string
-  password?: string // optional for Google auth
+  password?: string
   verifyCode?: string
   verifyCodeExpiry?: Date
   isVerified: boolean
   isAdmin: boolean
   provider: 'local' | 'google'
-  googleId?: string // for tracking Google users
+  googleId?: string
+  fullName?: string
+  bio?: string
+  socialUrl?: string[]
 }
 
 const UserSchema: Schema<IUser> = new Schema<IUser>(
@@ -20,11 +23,25 @@ const UserSchema: Schema<IUser> = new Schema<IUser>(
       trim: true,
       unique: true,
     },
-
+    fullName: {
+      type: String,
+      trim: true,
+      maxlength: 100,
+    },
+    bio: {
+      type: String,
+      trim: true,
+      maxlength: 500,
+    },
+    socialUrl: {
+      type: [String],
+      default: [],
+    },
     email: {
       type: String,
       required: [true, 'Email is required'],
       trim: true,
+      lowercase: true,
       unique: true,
       match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Please enter a valid email address'],
     },
